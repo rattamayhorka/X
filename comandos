@@ -1,0 +1,287 @@
+***********copiar y pegar a terminal dentro y fuera*********
+sudo pacman -S urxvt-perls
+add to .Xresources
+--------------------------------------------------------------------
+URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select
+URxvt.keysym.M-o:       perl:url-select:select_next
+URxvt.keysym.M-Escape:  perl:keyboard-select:activate
+URxvt.keysym.M-s:       perl:keyboard-select:search
+************************configuracion teclado laptop***************
+localectl set-x11-keymap es,us pc105 deadtilde grp:alt_shift_toggle
+*******************************************************************
+sudo pacman -S ntp       //actualizar hora automaticamente
+ls /etc/ntp.conf         //configuracion ntp
+date                     //comando para hora actual fecha
+sudo ntpd -qg            //actualizar hora exacta por una vez
+date                     //verificar hora
+sudo hwclock -w          //guardar en bios la hora
+
+*****************actualizar automaticamente ntp en boot*************
+sudo nano /etc/systemd/system/ntp-once.service
+	[Unit]
+	Description=Network Time Service (once)
+	After=network.target nss-lookup.target 
+
+	[Service]
+	Type=oneshot
+	ExecStart=/usr/bin/ntpd -q -g -u ntp:ntp ; /sbin/hwclock -w
+
+	[Install]
+	WantedBy=multi-user.target
+
+sudo systemctl start ntp-once.service
+sudo systemctl enable --now ntp-once.service
+sudo systemctl enable ntp-once.service
+********************bluetooth*************************
+sudo pacman -S bluez bluez-utils
+lsusb
+bluetoothctl 
+lsmod
+ls /etc/systemd/system/
+sudo systemctl list-unit-files
+sudo systemctl start bluetooth.service
+sudo systemctl list-unit-files
+sudo systemctl --failed
+sudo systemctl list-unit-files
+sudo systemctl is-enabled bluetooth.service
+sudo systemctl start bluetooth.service
+sudo systemctl is-enabled bluetooth.service
+sudo systemctl enable --now bluetooth.service
+sudo reboot
+nano comandos
+sudo systemctl is-enabled bluetooth.service
+sudo systemctl list-unit-files
+sudo nano /etc/dbus-1/system.d/bluetooth.conf
+bluetoothctl
+****************************************************************
+
+watch nmcli dev wifi //para revisar la salida del comando cada 2s
+
+***********************instalacion de paquetes*************************
+sudo pacman -Rsn gimp // desinstalar
+sudo pacman -Syu // actualizar distro
+sudo pacman -Q // buscar todos los paquetes instalados
+sudo pacman -Syy //actualizar los repositorios
+
+****************recuperacion claves gpg***************************************
+sudo pacman -Syy
+sudo pacman-key --refresh-keys
+sudo pacman-key --populate archlinux
+sudo pacman -Scc
+sudo pacman -Syyu
+
+*********************mensajeros***********************************************
+telegram-cli
+msg <peer> Text //sends message to this peer
+fwd <user> <msg-seqno> //forward message to user. You can see message numbers starting client with -N
+chat_with_peer <peer> //starts one on one chat session with this peer. /exit or /quit to end this mode.
+add_contact <phone-number> <first-name> <last-name> //tries to add contact to contact-list by phone
+rename_contact <user> <first-name> <last-name> //tries to rename contact. If you have another device it will be a fight
+mark_read <peer> //mark read all received messages with peer
+delete_msg <msg-seqno> //deletes message (not completly, though)
+restore_msg <msg-seqno> //restores delete message. Impossible for secret chats. Only possible short time (one hour, I think) after deletion
+
+
+
+********************android mount***********************************
+/var/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C003%5D/Almacenamiento interno android mount
+/run/media/acatl/172DF43903C4DD9E //disco duro mount
+
+********************descargar videos de youtube*********************
+sudo pip install youtube-dl //instalacion videos 
+youtube-dl link // youtube videos
+youtube-dl -F https://www.youtube.com/watch?v=7_8gHnjlLeo // saber los mejores formatos disponibles del video
+youtube-dl -f best 'https://www.youtube.com/watch?v=iguTXdQGDwc' // descargar el mejor formato
+
+******************************colores*******************************
+
+LS_COLORS="ow=01;34" export LS_COLORS
+
+******************cambiar fecha y hora en linux*********************
+sudo date -s "07 SEP 2018 21:19:20" // cambiar fecha y hora en linux
+
+----------------------------eyeD3-----------------------------------
+instalacion eyeD3  // mp3 tag
+sudo pacman -S python-pip 
+sudo pacman -S python-eyed3
+sudo pip install eyeD3[display-plugin]
+
+eyeD3 --add-image /path/to/cover.jpg:OTHER /music/file/folder/
+
+***************************busquedas********************************
+find  . -type f -name "*.mp3" -exec id3 {} | grep Metadata \; //buscar y ejecutar un comando con la salida...
+
+**************************awesome**********************************
+ln -s /etc/xdg/awesome/rc.lua /home/acatl/.config/awesome/ //configuracion template
+nano /home/acatl/.config/awesome/rc.lua                    //configuracion usuario
+sudo nano /usr/share/awesome/themes/default/theme.lua      //configuracion de tema
+
+~/.local/share/awesome_themes/rattaskull //themes
+~/.config/awesome //carpeta donde agregar widgets
+
+Xephyr -br -ac -noreset -screen 800x600 :1      //emular escritorio
+                                                //para verificar   
+                                                //el estado de     
+DISPLAY=:1 awesome                              //awesome           
+
+xprop //para saber datos de ventana
+pkill x  //matar X
+*****************************torrent********************************
+rtorrent // torrent
+rtorrent -h // help
+rtorrent <backspace> //to add torrent
+
+********************************************************************
+Ctrl + Alt + c //copiar en consola
+shift insert //pegar en consola
+
+**************************instalacion inicial*************************
+sudo nano /etc/X11/xorg.conf.d/10-keyboard.conf //configuracion de teclado
+startx //iniciar x
+xdg-user-dirs //crear carpetas
+xdg-user-dirs-update //
+ 
+*******************aplicaciones de inicio linux***********************
+nano /etc/issue //para logo de arch linux en el login antes de X
+nano ~/.xbindkeysrc //teclas multimedia
+nano ~/.xinitrc    //inicio automatico con las x /awesome
+nano ~/.bashrc //configuracion inicial de bash
+cp /etc/X11/xinit/xinitrc ~/.xinitrc  //inicio automatico original
+nano ~/.Xresources   //modificar URxvt
+/home/acatl/.bash_profile     //arrancar startx con el inicio de sesion
+
+
+
+****************************sonido************************************
+pamixer --get-volume  //incrementar volumen
+pamixer --increase 40 //incrementar volumen a 40
+pamixer -get-mute     //verificar mute
+pamixer --decrease 30 //bajar volumen -30
+
+***************************particiones*discos*disco*******************
+sudo nano /etc/fstab   //discos particiones
+mount -f ntfs /dev/sda2 /media/datos    //discos particiones
+lsblk -f //informacion de las particiones - discos
+
+**********************conexion a internet*****************************
+nmcli | grep wlp    //identificar que red esta conectada
+sudo nmcli dev wifi list
+nmcli dev wifi connect Larvademosca password v185coldera8344
+sudo nmcli dev wifi connect HST password 7afef#apR
+
+sudo ip link show wlp2s0  //estado de wifi
+sudo ip link set wlp2s0 up //subir wifi
+rfkill list //verificar si esta bloqueado por tecla o software 
+sudo rfkill unblock wifi //desbloquea wifi
+*****************************passwords****************************************
+ARRIS-5352 pin 32066968 key 9F4DCDACE74E4ACC password wifi
+ARRIS-C252 pin 49637168 KEY D2907F7657562A66 password wifi
+ARRIS-63C2 pin 30627581 key 11992A08C469A75C password wifi p455w0rd
+ARRIS-F477 pin key 2WC466400768 password wifi
+EF8087 key L21503735412139 password wifi
+ubee5D4A key DA0C885D4A password wifi
+ubeeD759-2.4G key 9C67F7D759 password wifi
+f3e40a key 269015625
+nmcli dev wifi connect ARRIS-63C2 password 11992A08C469A75C
+nmcli dev wifi connect Larvademosca password v185coldera8344
+nmcli dev wifi connect f3e40a password 269015625
+nmcli dev wifi connect ubee13CC password DA0C8C13CC 
+
+**************************graficos ***********************************
+feh --bg-center /ruta/de/fondo/archivo.* //configurar imagen como wallpaper
+screenfetch //datos de informacion desde consola
+
+*************************notificaciones*******************************
+notify-send "holi"   //enviar notificacion
+notifyconf //configuracion de servicio conf
+
+******************************cmus************************************
+cmusfm //scrobbler 
+yaourt -S cmusfm //instalacion de cmusfm
+cmusfm init //iniciar/verificar si funciona
+
+v //stop
+b //next
+z //previous
+c //pause
+s //toggle
+i //now playing 
+m //toggles artis/album/all shuffle
+x //restart track
+
+
+****************************ranger***********************************
+ranger //navegador de archivos
+
+*******************************acpi************************************
+systemctl poweroff
+systemctl reboot
+systemctl suspend
+systemctl hibernate
+systemctl hybrid-sleep
+
+*************************convertir ogg to mp3****************************
+#!/bin/bash
+
+find . -name *.ogg | while read line; do
+    ffmpeg -i "$line" -acodec libmp3lame -map_metadata 0:s:0 "${line:0:(-3)}mp3" </dev/null
+done
+*******************************************************
+
+************************************ipod**********************************
+ifuse /media/ipod
+****************************texto en archivos***************************** 
+
+sudo pacman -Q | sed 's/\s.*//'    ---/// eliminar despues de un espacio (\s) todo lo que sigue
+sed 's/^.*data-video-id//' // eliminar del principio hasta data 
+echo "texto " >> ~/comandos  /// se agrega un renglon al archivo comandos
+
+*******************************************archiso***************************************************
+sudo mkdir /media/extra/livecd
+sudo pacman -Qqe >> /home/acatl/list
+nano /home/acatl/list
+cp -r /usr/share/archiso/configs/releng/* /media/extra/livecd
+sudo cp -r /usr/share/archiso/configs/releng/* /media/extra/livecd
+sudo mkdir -p /media/extra/livecd/airootfs/home
+sudo mkdir -p /media/extra/livecd/airootfs/home/acatl
+sudo cp /home/acatl/.Xauthority /media/extra/livecd/airootfs/home/acatl/.Xauthority
+sudo cp /home/acatl/.xinitrc /media/extra/livecd/airootfs/home/acatl/.xinitrc
+sudo cp /home/acatl/.xbindkeysrc /media/extra/livecd/airootfs/home/acatl/.xbindkeysrc
+sudo nano /media/extra/livecd/airootfs/home/acatl/.xinitrc
+sudo cp /etc/shadow /media/extra/livecd/airootfs/etc/
+sudo cp /etc/group /media/extra/livecd/airootfs/etc/
+sudo cp /etc/passwd /media/extra/livecd/airootfs/etc/
+ls /media/extra/livecd/airootfs/etc/
+sudo nano packages.x86_64
+sudo ./build.sh -v
+sudo su
+sudo nano packages.x86_64 
+sudo ./build.sh -v
+ls -l /media/extra/livecd/
+sudo arch-chroot /media/extra/livecd/work/x86_64/airootfs/
+sudo nano ./build.sh
+sudo rm -f ./out/archlinux-2018.09.21-x86_64.iso
+sudo arch-chroot /media/extra/livecd/work/x86_64/airootfs/
+  2  pacman-key --init
+  3  pacman-key --populate
+  5  gcompris-qt 
+  6  pamixer --get-volume
+  7  pamixer
+  8  pacman -S pamixer
+  9  pamixer
+  10  pamixer --get-volume
+  11  alsamixer
+  12  pamixer --list-sources
+  13  ls -la /home/acatl/
+  14  chown acatl /home/acatl/
+  15  nano /etc/locale.gen 
+  16  locale-gen
+  17  nano /etc/locale.conf
+  20  nano /home/acatl/.xinitrc 
+  21  nano /home/acatl/.bash_profile
+sudo ./build.sh -v
+sudo dd if=/media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso of=/dev/sdb
+ls -la /media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso 
+ls -cla /media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso 
+ls -cl /media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso
+******************************version 1.1.2***********************************
