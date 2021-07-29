@@ -224,7 +224,6 @@ sudo ip link show wlp2s0  //estado de wifi
 sudo ip link set wlp2s0 up //subir wifi
 rfkill list //verificar si esta bloqueado por tecla o software 
 sudo rfkill unblock wifi //desbloquea wifi
-*****************************passwords****************************************
 
 *****************************passwords****************************************
 nmcli dev wifi connect ARRIS-C252 password D2907F7657562A66
@@ -238,19 +237,6 @@ nmcli dev wifi connect Ubee13CC password DA0C8C13CC
 nmcli dev wifi connect ARRIS-F477 password 2WC466400768
 nmcli dev wifi connect ARRIS-5352 password 9F4DCDACE74E4ACC
 nmcli dev wifi connect "AXTEL-0758" password password hidden yes
-
-ARRIS-5352 pin 32066968 key 9F4DCDACE74E4ACC password wifi
-ARRIS-C252 pin 49637168 KEY D2907F7657562A66 password wifi
-ARRIS-63C2 pin 30627581 key 11992A08C469A75C password wifi p455w0rd
-ARRIS-F477 pin key 2WC466400768 password wifi
-EF8087 key L21503735412139 password wifi
-ubee5D4A key DA0C885D4A password wifi
-ubeeD759-2.4G key 9C67F7D759 password wifi
-f3e40a key 269015625
-nmcli dev wifi connect ARRIS-63C2 password 11992A08C469A75C
-nmcli dev wifi connect Larvademosca password v185coldera8344
-nmcli dev wifi connect f3e40a password 269015625
-nmcli dev wifi connect ubee13CC password DA0C8C13CC 
 
 **************************graficos ***********************************
 feh --bg-center /ruta/de/fondo/archivo.* //configurar imagen como wallpaper
