@@ -1,3 +1,19 @@
+******************************nanorc*******************************************
+copiar en /usr/share/nano/default.nanorc
+
+color blue " //.*" //comandos despues del //
+color red "[*][*][*].*" divisiones en rojo ***
+
+*********************install yay **********************************************
+install yay //instalar yay
+sudo pacman -R yay //Remove yay for update 
+
+cd /tmp
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+rm -rf yay //clean yay temp files 
 ***********copiar y pegar a terminal dentro y fuera*********
 sudo pacman -S urxvt-perls
 add to .Xresources
@@ -6,6 +22,7 @@ URxvt.perl-ext-common:  default,clipboard,url-select,keyboard-select
 URxvt.keysym.M-o:       perl:url-select:select_next
 URxvt.keysym.M-Escape:  perl:keyboard-select:activate
 URxvt.keysym.M-s:       perl:keyboard-select:search
+
 ************************configuracion teclado laptop***************
 localectl set-x11-keymap es,us pc105 deadtilde grp:alt_shift_toggle
 *******************************************************************
@@ -232,9 +249,9 @@ done
 ifuse /media/ipod
 ****************************texto en archivos***************************** 
 
-sudo pacman -Q | sed 's/\s.*//'    ---/// eliminar despues de un espacio (\s) todo lo que sigue
-sed 's/^.*data-video-id//' // eliminar del principio hasta data 
-echo "texto " >> ~/comandos  /// se agrega un renglon al archivo comandos
+sudo pacman -Q | sed 's/\s.*//'    // eliminar despues de un espacio (\s) todo lo que sigue
+sed 's/^.*data-video-id//' //eliminar del principio hasta data 
+echo "texto " >> ~/comandos  // se agrega un renglon al archivo comandos
 
 *******************************************archiso***************************************************
 sudo mkdir /media/extra/livecd
@@ -284,4 +301,11 @@ sudo dd if=/media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso of=/dev/sdb
 ls -la /media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso 
 ls -cla /media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso 
 ls -cl /media/extra/livecd/out/archlinux-2018.09.21-x86_64.iso
-******************************version 1.1.2***********************************
+*****************************************quemar disco DVD **************************************************
+growisofs -dvd-compat -Z /dev/sr0=/home/acatl/Descargas/Windows\ XP\ Professional\ SP3\ +\ Serial.iso
+sudo pacman -S dvd+rw-tools
+growisofs -dvd-compat -Z /dev/sr0=/home/acatl/Descargas/Windows\ XP\ Professional\ SP3\ +\ Serial.iso
+dvd+rw-format -blank=fast /dev/sr0
+growisofs -dvd-compat -Z /dev/sr0=/home/acatl/Descargas/Windows\ XP\ SP2/WINXPPRO_.iso 
+
+*************************************version 1.2.0**********************************************************
