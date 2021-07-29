@@ -1,3 +1,37 @@
+##--------------------------mezclar dos imagenes-------------------------------
+
+composite -gravity center ~/Escritorio/desc.png ~/Escritorio/wallpaper.jpg ~/Escritorio/no_desconectar.png | display ~/Escritorio/*.png
+
+---------------seleccionar un cuadro dentro de la imagen---------------------
+convert -crop '140x140+90+36' ~/Escritorio/no_desconectar.png ~/Escritorio/otro.png
+
+
+
+
+composite -gravity center ~/Escritorio/desc.png ~/Escritorio/base.jpg ~/Escritorio/buffer.png
+convert -crop '140x140+90+36' ~/Escritorio/buffer.png ~/Escritorio/01.png
+rm ~/Escritorio/buffer.png
+display ~/Escritorio/*.png
+
+
+***************************************github*******************************************
+git
+git init
+git add avrprogram.sh 
+git commit
+git commit -m "beta para verificar programacion microcontrolador en stk500"
+echo "# stk500" >> README.md
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/rattamayhorka/stk500.git
+git push -u origin main
+git push
+
+*********************************modificaciones en default.nanorc*************************
+color blue " //.*"
+color red "[*][*].*"
+
 ******************************nanorc*******************************************
 copiar en /usr/share/nano/default.nanorc
 
@@ -191,6 +225,20 @@ sudo ip link set wlp2s0 up //subir wifi
 rfkill list //verificar si esta bloqueado por tecla o software 
 sudo rfkill unblock wifi //desbloquea wifi
 *****************************passwords****************************************
+
+*****************************passwords****************************************
+nmcli dev wifi connect ARRIS-C252 password D2907F7657562A66
+nmcli dev wifi connect EF8087 password L21503735412139
+nmcli dev wifi connect ubee5D4A password DA0C885D4A
+nmcli dev wifi connect ubeeD759-2.4G password 9C67F7D759
+nmcli dev wifi connect ARRIS-63C2 password 11992A08C469A75C
+nmcli dev wifi connect Larvademosca password v185coldera8344
+nmcli dev wifi connect f3e40a password 269015625
+nmcli dev wifi connect Ubee13CC password DA0C8C13CC 
+nmcli dev wifi connect ARRIS-F477 password 2WC466400768
+nmcli dev wifi connect ARRIS-5352 password 9F4DCDACE74E4ACC
+nmcli dev wifi connect "AXTEL-0758" password password hidden yes
+
 ARRIS-5352 pin 32066968 key 9F4DCDACE74E4ACC password wifi
 ARRIS-C252 pin 49637168 KEY D2907F7657562A66 password wifi
 ARRIS-63C2 pin 30627581 key 11992A08C469A75C password wifi p455w0rd
