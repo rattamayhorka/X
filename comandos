@@ -1,3 +1,8 @@
+********************************github******************************************
+git push https://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@github.com/rattamayhorka/VICO.git
+
+token github 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
+
 ##--------------------------mezclar dos imagenes-------------------------------
 
 composite -gravity center ~/Escritorio/desc.png ~/Escritorio/wallpaper.jpg ~/Escritorio/no_desconectar.png | display ~/Escritorio/*.png
@@ -121,6 +126,8 @@ sudo pacman-key --populate archlinux
 sudo pacman -Scc
 sudo pacman -Syyu
 
+*****************************instalacion de paquetes AUR********************
+yay -syu --aur //actualizar todos paquetes AUR
 *********************mensajeros***********************************************
 telegram-cli
 msg <peer> Text //sends message to this peer
@@ -341,5 +348,8 @@ sudo pacman -S dvd+rw-tools
 growisofs -dvd-compat -Z /dev/sr0=/home/acatl/Descargas/Windows\ XP\ Professional\ SP3\ +\ Serial.iso
 dvd+rw-format -blank=fast /dev/sr0
 growisofs -dvd-compat -Z /dev/sr0=/home/acatl/Descargas/Windows\ XP\ SP2/WINXPPRO_.iso 
+
+****************************************trucos find ********************************************************************
+find . -type f | perl -ne 'print $1 if m/\.([^.\/]+)$/' | sort -u     //buscar extensiones en una carpeta
 
 *************************************version 1.2.1**********************************************************
